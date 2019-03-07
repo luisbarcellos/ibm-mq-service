@@ -2,7 +2,6 @@ package br.com.ibmmq.controller;
 
 import br.com.ibmmq.service.IbmMqService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jms.JmsException;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -13,13 +12,7 @@ public class IbmMqController {
 
     @PostMapping("msg")
     public String enviarMsg(@RequestParam(name = "mensagem", required = true) String mensagem){
-        try{
-            ibmMqService.enviarMsg(mensagem);
-            return "OK";
-        }catch(JmsException ex){
-            ex.printStackTrace();
-            return "FAIL";
-        }
+        return ibmMqService.enviarMsg(mensagem);
     }
 
     @GetMapping("msg")
